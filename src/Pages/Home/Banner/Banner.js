@@ -1,11 +1,12 @@
 import React from "react";
 import chair from "../../../Assets/images/chair.png";
+import PrimaryButton from "../../../Components/PrimaryButton/PrimaryButton";
 import "./Banner.css";
 
 const Banner = () => {
   return (
     <div className="hero">
-      <div className="rounded-lg mt-8 bg-center w-full h-full bg-no-repeat hero-content flex-col lg:flex-row-reverse p-9 text-white">
+      <div className="bg-img rounded-lg mt-8 bg-center w-full h-full bg-no-repeat hero-content flex-col lg:flex-row-reverse p-9 text-white">
         <img alt="" src={chair} className="rounded-lg shadow-2xl lg:w-1/2" />
         <div>
           <h1 className="text-5xl font-bold">Your New Smile Starts Here</h1>
@@ -14,9 +15,7 @@ const Banner = () => {
             excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
             a id nisi.
           </p>
-          <button className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white">
-            Get Started
-          </button>
+          <PrimaryButton>Get Started</PrimaryButton>
         </div>
       </div>
     </div>
