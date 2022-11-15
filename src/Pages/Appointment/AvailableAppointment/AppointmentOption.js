@@ -18,6 +18,7 @@ const AppointmentOption = ({ appointmentOption, setTreatment }) => {
         </p>
         <div className="card-actions justify-center">
           <label
+            disabled={slots.length === 0}
             onClick={() => setTreatment(appointmentOption)}
             htmlFor="booking-modal"
             className="btn btn-primary bg-gradient-to-r from-primary to-secondary text-white"
