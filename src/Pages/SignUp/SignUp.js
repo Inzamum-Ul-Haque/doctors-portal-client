@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -11,6 +13,13 @@ const SignUp = () => {
 
   const handleSignUp = (data) => {
     console.log(data);
+
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -61,7 +70,8 @@ const SignUp = () => {
                 pattern: {
                   value:
                     /(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z].*[a-z])/,
-                  message: "Password should be strong",
+                  message:
+                    "Password must have 2 uppercase, 1 special, 1 digit and 2 lowercase characters!",
                 },
               })}
               placeholder="Password"
