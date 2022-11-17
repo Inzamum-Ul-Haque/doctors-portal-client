@@ -15,10 +15,12 @@ const AvailableAppointment = ({ selectedDate }) => {
     isLoading,
   } = useQuery({
     queryKey: ["appointments", date],
-    queryFn: () => {
-      return fetch(`http://localhost:5000/appointments?date=${date}`).then(
-        (res) => res.json()
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/appointments?date=${date}`
       );
+      const data = await res.json();
+      return data;
     },
   });
 

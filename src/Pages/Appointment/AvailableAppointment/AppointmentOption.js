@@ -13,7 +13,7 @@ const AppointmentOption = ({ appointmentOption, setTreatment }) => {
           {slots.length > 0 ? slots[0] : "Try another day"}
         </p>
         <p className="text-center">
-          {slots.length}
+          {slots.length + " "}
           {slots.length > 1 ? "spaces" : "space"} available
         </p>
         <div className="card-actions justify-center">
