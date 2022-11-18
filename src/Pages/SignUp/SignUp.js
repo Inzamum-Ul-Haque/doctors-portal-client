@@ -5,7 +5,7 @@ import { AuthContext } from "../../Contexts/AuthProvider";
 import { toast } from "react-hot-toast";
 
 const SignUp = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, loading } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
   const navigate = useNavigate();
   const {
@@ -15,7 +15,6 @@ const SignUp = () => {
   } = useForm();
 
   const handleSignUp = (data) => {
-    console.log(data);
     setSignUpError("");
 
     createUser(data.email, data.password)
@@ -27,17 +26,43 @@ const SignUp = () => {
         const userInfo = {
           displayName: data.name,
         };
-        console.log(userInfo);
 
         updateUserProfile(userInfo)
           .then(() => {
-            navigate("/");
+            saveUser(data.name, data.email);
           })
           .catch((error) => console.error(error));
       })
       .catch((error) => {
         console.log(error);
         setSignUpError(error.message);
+      });
+  };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        getUserToken(email);
+      });
+  };
+
+  const getUserToken = (email) => {
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.accessToken) {
+          localStorage.setItem("accessToken", data.accessToken);
+          navigate("/");
+          console.log(loading);
+        }
       });
   };
 
