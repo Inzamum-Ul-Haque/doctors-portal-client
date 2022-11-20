@@ -33,7 +33,7 @@ const AddDoctor = () => {
     formData.append("image", image);
 
     // host the image in third party server and get the url to save on mongodb
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostingKey}`;
+    const url = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
     fetch(url, {
       method: "POST",
       body: formData,
