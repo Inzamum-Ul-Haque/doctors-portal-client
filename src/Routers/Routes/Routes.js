@@ -8,6 +8,7 @@ import ManageDoctors from "../../Pages/Dashboard/ManageDoctors/ManageDoctors";
 import MyAppointments from "../../Pages/Dashboard/MyAppointments/MyAppointments";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import Home from "../../Pages/Home/Home/Home";
+import DisplayError from "../../Pages/Shared/DisplayError/DisplayError";
 import SignIn from "../../Pages/SignIn/SignIn";
 import SignUp from "../../Pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <DisplayError />,
     children: [
       {
         path: "/",
@@ -43,6 +45,7 @@ const router = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoute>
     ),
+    errorElement: <DisplayError />,
     children: [
       {
         path: "/dashboard",
